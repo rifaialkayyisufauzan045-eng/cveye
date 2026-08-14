@@ -1,0 +1,200 @@
+Metadata-Version: 2.4
+Name: cveye
+Version: 1.0.0
+Summary: CVE Intelligence & Technology Scanner
+Author: CVEye Contributors
+License: MIT
+Keywords: security,cve,vulnerability,scanner
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Information Technology
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Security
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: typer>=0.12.0
+Requires-Dist: rich>=13.7.0
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: beautifulsoup4>=4.12.0
+Requires-Dist: packaging>=24.0
+Requires-Dist: dnspython>=2.6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23.0; extra == "dev"
+Dynamic: license-file
+
+# CVEye
+
+**CVE Intelligence & Technology Scanner**
+
+CVEye is a Python-based cybersecurity CLI tool for network discovery, service detection, web technology fingerprinting, software version detection, and CVE correlation. It focuses on **identification and vulnerability analysis**, not exploitation.
+
+## ⚠ Authorized Use Warning
+
+Use CVEye **only** on systems you own or have explicit written permission to test. Unauthorized scanning may violate laws and policies.
+
+## Features
+
+- Network scanning with TCP port discovery
+- Service fingerprinting with banner analysis
+- Web technology detection (Nginx, Apache, PHP, WordPress, Drupal, Joomla, and more)
+- Security header analysis
+- TLS certificate inspection
+- CVE correlation via NVD API
+- CISA Known Exploited Vulnerabilities (KEV) marking
+- Version range matching for accurate CVE status
+- Risk assessment engine
+- Terminal, JSON, and HTML reporting
+
+## Installation
+
+```bash
+git clone <repo-url> CVEye
+cd CVEye
+pip install -e .
+```
+
+Or with requirements:
+
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+Requires **Python 3.11+**.
+
+## Usage
+
+```bash
+# Basic scan
+cveye scan example.com
+
+# Network + CVE
+cveye scan 192.168.1.10 --network --cve
+
+# Web fingerprinting + CVE
+cveye scan example.com --web --cve
+
+# Deep scan with reports
+cveye scan example.com --deep --json report.json --html report.html
+
+# Custom ports
+cveye scan 192.168.1.10 --ports 22,80,443,8080
+
+# CIDR scan
+cveye scan 192.168.1.0/24 --network
+
+# Other commands
+cveye version
+cveye config --show
+cveye update
+```
+
+### Scan Options
+
+| Option | Description |
+|--------|-------------|
+| `--ports` | Custom port list (comma-separated) |
+| `--web` / `--no-web` | Enable/disable web fingerprinting |
+| `--network` / `--no-network` | Enable/disable network scanning |
+| `--cve` / `--no-cve` | Enable/disable CVE correlation |
+| `--deep` | Deep scan with additional paths |
+| `--timeout` | Connection timeout (default: 5s) |
+| `--threads` | Scan threads (default: 10) |
+| `--rate-limit` | HTTP requests per second (default: 1) |
+| `--json` | JSON report output path |
+| `--html` | HTML report output path |
+| `--quiet` | Minimal output |
+| `--verbose` | Debug logging |
+
+## Architecture
+
+```
+DISCOVER → FINGERPRINT → IDENTIFY VERSION → CORRELATE CVE → ASSESS RISK → REPORT
+```
+
+### Modules
+
+- `cveye/network/` — Port scanning and service fingerprinting
+- `cveye/web/` — HTTP fingerprinting, TLS, security headers
+- `cveye/fingerprint/` — Modular technology detectors
+- `cveye/cve/` — NVD client, version matching, CISA KEV
+- `cveye/risk/` — Risk assessment engine
+- `cveye/reporting/` — Terminal, JSON, HTML output
+
+## Supported Detectors
+
+| Category | Technologies |
+|----------|-------------|
+| Web Server | Nginx, Apache, LiteSpeed, Caddy, IIS |
+| Runtime | PHP, Node.js |
+| CMS | WordPress, Drupal, Joomla |
+| Framework | Laravel, Django, Next.js |
+| Service | OpenSSH, MySQL, PostgreSQL, Redis |
+
+## CVE Sources
+
+- **NVD** (National Vulnerability Database) — primary source
+- **CVE.org** — fallback for individual CVE lookup
+- **CISA KEV** — Known Exploited Vulnerabilities catalog
+
+## Version Matching
+
+CVEye uses the `packaging` library for version comparison and supports NVD CPE version ranges:
+
+```
+Affected: >= 1.20.0 < 1.26.1
+Detected: 1.24.0
+Status:   POTENTIALLY AFFECTED
+```
+
+CVE status values: `AFFECTED`, `POTENTIALLY AFFECTED`, `NOT AFFECTED`, `UNKNOWN`.
+
+## Configuration
+
+```bash
+export NVD_API_KEY="YOUR_KEY"   # Optional, improves rate limits
+cveye config --show
+cveye config --set cache_ttl_hours=48
+```
+
+Config stored at `~/.cveye/config.json`. CVE cache at `.cache/cve/`.
+
+## Output Formats
+
+### Terminal
+Rich-formatted output with banner, progress, technology list, CVE findings, and risk summary.
+
+### JSON
+```bash
+cveye scan example.com --json report.json
+```
+
+### HTML
+```bash
+cveye scan example.com --html report.html
+```
+
+## Testing
+
+```bash
+pytest tests/ -v
+```
+
+Tests use mocked data and do not depend on external websites.
+
+## Limitations
+
+- CVE correlation requires network access to NVD API
+- Without NVD API key, rate limits apply (cached results used when available)
+- Version detection depends on publicly exposed information
+- CIDR scans are limited to 256 hosts
+- No exploitation, brute force, or invasive testing
+
+## License
+
+MIT License — see [LICENSE](LICENSE).

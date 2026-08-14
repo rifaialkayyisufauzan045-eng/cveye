@@ -1,0 +1,143 @@
+{
+  "timestamp": 1786671347.7231646,
+  "findings": [
+    {
+      "cve_id": "CVE-2020-24186",
+      "vendor": "wordpress",
+      "product": "wordpress",
+      "description": "A Remote Code Execution vulnerability exists in the gVectors wpDiscuz plugin 7.0 through 7.0.4 for WordPress, which allows unauthenticated users to upload any type of file, including PHP files via the wmuUploadFiles AJAX action.",
+      "cvss_score": 10.0,
+      "severity": "CRITICAL",
+      "cwe": [
+        "CWE-434"
+      ],
+      "status": "UNKNOWN",
+      "detected_version": null,
+      "source": "NVD API",
+      "search_confidence": null,
+      "reference_url": null,
+      "cisa_kev": false,
+      "affected_versions": [],
+      "fixed_version": null,
+      "references": [
+        "http://packetstormsecurity.com/files/162983/WordPress-wpDiscuz-7.0.4-Shell-Upload.html",
+        "http://packetstormsecurity.com/files/163012/WordPress-wpDiscuz-7.0.4-Remote-Code-Execution.html",
+        "http://packetstormsecurity.com/files/163302/WordPress-wpDiscuz-7.0.4-Shell-Upload.html",
+        "https://www.wordfence.com/blog/2020/07/critical-arbitrary-file-upload-vulnerability-patched-in-wpdiscuz-plugin/",
+        "http://packetstormsecurity.com/files/162983/WordPress-wpDiscuz-7.0.4-Shell-Upload.html",
+        "http://packetstormsecurity.com/files/163012/WordPress-wpDiscuz-7.0.4-Remote-Code-Execution.html",
+        "http://packetstormsecurity.com/files/163302/WordPress-wpDiscuz-7.0.4-Shell-Upload.html",
+        "https://www.wordfence.com/blog/2020/07/critical-arbitrary-file-upload-vulnerability-patched-in-wpdiscuz-plugin/"
+      ]
+    },
+    {
+      "cve_id": "CVE-2021-24822",
+      "vendor": "wordpress",
+      "product": "wordpress",
+      "description": "The Stylish Cost Calculator WordPress plugin before 7.0.4 does not have any authorisation and CSRF checks on some of its AJAX actions (available to authenticated users), which could allow any authenticated users, such as subscriber to call them, and perform Stored Cross-Site Scripting attacks against logged in admin, as well as frontend users due to the lack of sanitisation and escaping in some parameters",
+      "cvss_score": 5.4,
+      "severity": "MEDIUM",
+      "cwe": [
+        "CWE-79",
+        "CWE-352",
+        "CWE-79",
+        "CWE-352"
+      ],
+      "status": "UNKNOWN",
+      "detected_version": null,
+      "source": "NVD API",
+      "search_confidence": null,
+      "reference_url": null,
+      "cisa_kev": false,
+      "affected_versions": [],
+      "fixed_version": null,
+      "references": [
+        "https://wpscan.com/vulnerability/db84a782-d4c8-4abf-99ea-ea672a9b806e",
+        "https://wpscan.com/vulnerability/db84a782-d4c8-4abf-99ea-ea672a9b806e"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-15348",
+      "vendor": "wordpress",
+      "product": "wordpress",
+      "description": "The Premium Packages \u2013 Sell Digital Products Securely plugin for WordPress is vulnerable to Authentication Bypass in all versions up to, and including, 7.0.4 via the `wpdmppdl` parameter. This is due to the `download()` function \u2014 hooked to the unauthenticated WordPress `wp` action \u2014 decoding the attacker-controlled `wpdmppdl` parameter using only `base64_decode()` and `json_decode()` with no HMAC, cryptographic signature, or nonce verification, and then issuing WordPress authentication cookies after a domain check that is trivially bypassed because both sides of the comparison are attacker-supplied values. This makes it possible for unauthenticated attackers to authenticate as any non-administrator WordPress user, including subscribers, customers, contributors, authors, editors, and shop managers, who owns an order, gaining full session-level access to that account.",
+      "cvss_score": 6.3,
+      "severity": "MEDIUM",
+      "cwe": [
+        "CWE-287"
+      ],
+      "status": "UNKNOWN",
+      "detected_version": null,
+      "source": "NVD API",
+      "search_confidence": null,
+      "reference_url": null,
+      "cisa_kev": false,
+      "affected_versions": [],
+      "fixed_version": null,
+      "references": [
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/includes/libs/functions.php#L1811",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/wpdm-premium-packages.php#L119",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/wpdm-premium-packages.php#L585",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/wpdm-premium-packages.php#L632",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/wpdm-premium-packages.php#L637",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/includes/libs/functions.php#L1811",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/wpdm-premium-packages.php#L119",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/wpdm-premium-packages.php#L585",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/wpdm-premium-packages.php#L632",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/wpdm-premium-packages.php#L637"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-15906",
+      "vendor": "wordpress",
+      "product": "wordpress",
+      "description": "The Premium Packages \u2013 Sell Digital Products Securely plugin for WordPress is vulnerable to generic SQL Injection via the 'orderby' parameter in all versions up to, and including, 7.0.4 due to insufficient escaping on the user supplied parameter and lack of sufficient preparation on the existing SQL query. This makes it possible for authenticated attackers, with admin-level access and above, to append additional SQL queries into already existing queries that can be used to extract sensitive information from the database.",
+      "cvss_score": 6.5,
+      "severity": "MEDIUM",
+      "cwe": [
+        "CWE-89"
+      ],
+      "status": "UNKNOWN",
+      "detected_version": null,
+      "source": "NVD API",
+      "search_confidence": null,
+      "reference_url": null,
+      "cisa_kev": false,
+      "affected_versions": [],
+      "fixed_version": null,
+      "references": [
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/src/Admin/Order/views/list-order-renews.php#L51",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/src/Admin/Order/views/list-order-renews.php#L53",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.0/src/Order/OrderService.php#L314",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/src/Admin/Order/views/list-order-renews.php#L51",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/src/Admin/Order/views/list-order-renews.php#L53",
+        "https://plugins.trac.wordpress.org/browser/wpdm-premium-packages/tags/7.0.3/src/Order/OrderService.php#L314",
+        "https://plugins.trac.wordpress.org/changeset?reponame=&old=3611573%40wpdm-premium-packages&new=3611573%40wpdm-premium-packages",
+        "https://www.wordfence.com/threat-intel/vulnerabilities/id/9bc6d516-7636-45b2-ade1-c8f2297f0ea1?source=cve"
+      ]
+    },
+    {
+      "cve_id": "CVE-2026-17515",
+      "vendor": "wordpress",
+      "product": "wordpress",
+      "description": "The MLSImport: IDX Plugin & MLS Plugin for Real Estate Listings WordPress plugin before 7.0.4 does not have authorisation and CSRF checks in one of its AJAX actions, allowing any authenticated user, such as a subscriber, to read the contents of the MLSImport: IDX Plugin & MLS Plugin for Real Estate Listings WordPress plugin before 7.0.4's import log file as well as import-related metadata belonging to arbitrary posts.",
+      "cvss_score": 4.3,
+      "severity": "MEDIUM",
+      "cwe": [
+        "CWE-200",
+        "CWE-352"
+      ],
+      "status": "UNKNOWN",
+      "detected_version": null,
+      "source": "NVD API",
+      "search_confidence": null,
+      "reference_url": null,
+      "cisa_kev": false,
+      "affected_versions": [],
+      "fixed_version": null,
+      "references": [
+        "https://wpscan.com/vulnerability/8c8da95c-df83-4788-bcb2-ca924a60f909/"
+      ]
+    }
+  ]
+}
