@@ -127,7 +127,7 @@ Di perangkat lain, pastikan Git dan Python sudah tersedia.
 Clone repository:
 
 ```bash
-git clone https://github.com/rifaialkayyisufauzan045-eng/cveye.git
+git clone https://github.com/RifaiAl31/cveye.git
 ```
 
 Masuk ke directory:
